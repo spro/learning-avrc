@@ -3,11 +3,6 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-#define output_low(port, pin) port &= ~(1<<pin)
-#define output_high(port, pin) port |= (1<<pin)
-#define set_input(portdir, pin) portdir &= ~(1<<pin)
-#define set_output(portdir, pin) portdir |= (1<<pin)
-
 void delay_ms(int n) {
     while (n--) {
         _delay_ms(1);
@@ -21,14 +16,14 @@ int main(void) {
     PORTB = 0x00; // Make pins low to start
 
     // Setup ADC
-    ADMUX = (1 << REFS0) | (1 << MUX0) | (1 << MUX2);
-    ADCSRA = (1 << ADPS0) | (1 << ADPS1); // 1m / 8
+    ADMUX = (1 << REFS0) | (1 << MUX0) | (1 << MUX2); // Using ADC pin 5
+    ADCSRA = (1 << ADPS0) | (1 << ADPS1); // Scale ADC clock to 1mhz / 8
 
     // Enable and start going
     ADCSRA |= (1 << ADIE) | (1 << ADATE); // Free Running mode
     ADCSRA |= (1 << ADEN) | (1 << ADSC);
 
-    // Disable digital
+    // Disable digital input on pin 5
     DIDR0 = (1 << ADC5D);
 
     sei();
@@ -41,13 +36,5 @@ int main(void) {
 }
 
 ISR(ADC_vect) {
-    blinklen = ADCW;
-    //if (ADCW > 28) {
-        //PORTB = 0xFF;
-        //blinklen = 100;
-    //} else {
-        //PORTB = 0x00;
-        //blinklen = 300;
-    //}
-    //ADCSRA |= (1 << ADSC);
+    blinklen = ADCW; // Set blink time to analog read
 }
