@@ -9,3 +9,6 @@ Simple AVR C projects with the ATMega328p and ATTiny85
 * [analog-nightlight](https://github.com/spro/learning-avrc/tree/master/analog-nightlight)
   Measures light with a photoresistor and turns on more LEDs as it gets darker.
 
+* [fading-rgb](https://github.com/spro/learning-avrc/tree/master/fading-rgb)
+  Smoothly transitioning between colors of an RGB LED with PWM. OMG.
+
