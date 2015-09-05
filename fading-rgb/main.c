@@ -1,14 +1,18 @@
-#define F_CPU 16500000L
+#define F_CPU 1000000L
 #include <avr/io.h>
 #include <util/delay.h>
+
+#define R_PIN 0
+#define G_PIN 1
+#define B_PIN 4
 
 void delay_ms(int ms) {
     while (ms-- > 0)
         _delay_us(1);
 }
 
-int cycle = 5500; // Total period in us of one on -> off cycle of LED
-float dd = 0.0015; // Increment of duty cycle (from 0.0 -> 1.0)
+int cycle = 1000; // Total period in us of one on -> off cycle of LED
+float dd = 0.00515; // Increment of duty cycle (from 0.0 -> 1.0)
 
 // Fade in
 void pwmup(int pin) {
@@ -38,10 +42,10 @@ void pwm(int pin, int dir) {
         delay_ms(cycle*(1-duty));
 
         // Stop at threshold
-        if ((dir == 1) && (duty >= 0.999)) {
+        if ((dir == 1) && (duty >= 0.9999)) {
             going = 0; // Stop now
         }
-        else if ((dir == 0) && (duty <= 0.001)) {
+        else if ((dir == 0) && (duty <= 0.0001)) {
             going = 0; // Stop now
         }
     }
@@ -53,19 +57,31 @@ void pwm(int pin, int dir) {
         PORTB &= ~(1 << pin); // Turn it off
 }
 
+void blink(int pin) {
+    PORTB ^= (1 << pin);
+    _delay_ms(1000);
+    PORTB ^= (1 << pin);
+    _delay_ms(1000);
+}
+
 int main(void) {
-    DDRB = (1 << 0) | (1 << 3) | (1 << 4); // Use LED_PIN for output
+    DDRB = (1 << R_PIN) | (1 << G_PIN) | (1 << B_PIN); // Use LED_PIN for output
 
     // Cycle green -> yellow -> red -> purple -> blue -> aque -> green
 
-    PORTB |= (1 << 4); // Start green
+    blink(R_PIN);
+    blink(G_PIN);
+    blink(B_PIN);
+
+    PORTB = (1 << G_PIN); // Start green
+
     for (;;) {
-        pwmup(0); // Fade in red (-> yellow)
-        pwmdown(4); // Fade out green (-> red)
-        pwmup(3); // Fade in blue (-> purple)
-        pwmdown(0); // Fade out red (-> blue)
-        pwmup(4); // Fade in green (-> aqua)
-        pwmdown(3); // Fade out blue (-> green)
+        pwmup(R_PIN); // Fade in red (-> yellow)
+        pwmdown(G_PIN); // Fade out green (-> red)
+        pwmup(B_PIN); // Fade in blue (-> purple)
+        pwmdown(R_PIN); // Fade out red (-> blue)
+        pwmup(G_PIN); // Fade in green (-> aqua)
+        pwmdown(B_PIN); // Fade out blue (-> green)
     }
 
     return 0;
