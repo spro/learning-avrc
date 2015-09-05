@@ -16,5 +16,8 @@ Simple AVR C projects with the ATMega328p and ATTiny85
   Same result as above with "real" PWM using onboard timers.
 
 * [rgb-uart](https://github.com/spro/learning-avrc/tree/master/rgb-uart)
-  Listens for characters over 2400 baud UART and displays a corresponding color.
+  Listens for characters over 2400 baud UART and displays a color based on an incoming character.
+
+* [fading-rgb-uart](https://github.com/spro/learning-avrc/tree/master/fading-rgb-uart)
+  Combines UART and soft PWM to fade between colors by character.
 
