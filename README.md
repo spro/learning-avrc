@@ -7,8 +7,11 @@ Simple AVR C projects with the ATMega328p and ATTiny85
   Reads a potentiometer to set the delay time for some LEDs blinking.
 
 * [analog-nightlight](https://github.com/spro/learning-avrc/tree/master/analog-nightlight)
-  Measures light with a photoresistor and turns on more LEDs as it gets darker.
+  Measures light with a photoresistor and makes more light when it's dark.
 
 * [fading-rgb](https://github.com/spro/learning-avrc/tree/master/fading-rgb)
-  Smoothly transitioning between colors of an RGB LED with PWM. OMG.
+  Smoothly transitioning between colors of an RGB LED with PWM.
+
+* [rgb-uart](https://github.com/spro/learning-avrc/tree/master/rgb-uart)
+  Listens for characters over 2400 baud UART and displays a corresponding color.
 
