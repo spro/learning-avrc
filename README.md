@@ -12,6 +12,9 @@ Simple AVR C projects with the ATMega328p and ATTiny85
 * [fading-rgb](https://github.com/spro/learning-avrc/tree/master/fading-rgb)
   Smoothly transitioning between colors of an RGB LED with PWM.
 
+* [fading-rgb-true](https://github.com/spro/learning-avrc/tree/master/fading-rgb-true)
+  Same result as above with "real" PWM using onboard timers.
+
 * [rgb-uart](https://github.com/spro/learning-avrc/tree/master/rgb-uart)
   Listens for characters over 2400 baud UART and displays a corresponding color.
 
