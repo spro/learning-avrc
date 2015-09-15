@@ -8,9 +8,11 @@
 #define G_PIN 3
 #define B_PIN 4
 
-#define POSTSCALE0 2
-#define POSTSCALE1 1
+// "Post scale" of clock (4mhz * 4 * s), number of seconds between each toggle
+#define POSTSCALE0 4 * 2
+#define POSTSCALE1 4 * 1
 
+// Counters for post scaling
 int ti0 = 0;
 int ti1 = 0;
 
@@ -32,15 +34,14 @@ ISR(TIM1_COMPA_vect) {
 
 int main(void) {
     DDRB = (1 << G_PIN) | (1 << B_PIN); // Use green and blue pins for output
-    PORTB |= (1 << 2);
 
     TCCR0A = (1 << WGM01); // CTC: Clear timer on compare match 0A
-    TCCR0B = (1 << CS02) | (1 << CS00); // Clock divide by 1024 (1mhz / 1024 = ?)
-    OCR0A = 200; // Compare match 0A value
+    TCCR0B = (1 << CS02) | (1 << CS00); // Clock divide by 1024
+    OCR0A = 244; // Compare match 0A value (1mhz / 1024 = 4 times per sec)
 
     TCCR1 = (1 << CTC1); // Clear timer on compare match 1C
-    TCCR1 |= (1 << CS13) | (1 << CS11) | (1 << CS10); // Clock divide by 1024 (1mhz / 1024 = ?)
-    OCR1C = 200; // Compare match 1C value, same as above
+    TCCR1 |= (1 << CS13) | (1 << CS11) | (1 << CS10); // Clock divide by 1024
+    OCR1C = 244; // Compare match 1C value, same as above
 
     TIMSK |= (1 << OCIE0A) | (1 << OCIE1A); // Enable timer 0 and 1 compare matches
 
