@@ -6,11 +6,13 @@
 // Toggles the blue pin every 500ms, and toggles the green pin whenever the
 // logic state of INT0 (PB2) is changed.
 
+#define IN_PIN 2
 #define G_PIN 3
 #define B_PIN 4
 
 int main(void) {
     DDRB = (1 << G_PIN) | (1 << B_PIN); // Use green and blue pins for output
+    PORTB |= (1 << IN_PIN); // Pull up
 
     GIMSK |= (1 << INT0); // Enable INT0
     MCUCR |= (1 << 0); // On logic change
