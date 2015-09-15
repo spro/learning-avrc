@@ -21,3 +21,9 @@ Simple AVR C projects with the ATMega328p and ATTiny85
 * [fading-rgb-uart](https://github.com/spro/learning-avrc/tree/master/fading-rgb-uart)
   Combines UART and soft PWM to fade between colors by character.
 
+* [fading-rgb-uart](https://github.com/spro/learning-avrc/tree/master/fading-rgb-uart)
+  Combines UART and soft PWM to fade between colors by character.
+
+* [blink-interrupts](https://github.com/spro/learning-avrc/tree/master/blink-interrupts)
+  One LED blinks while another responds to state changes with an interrupt.
+
