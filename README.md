@@ -27,3 +27,6 @@ Simple AVR C projects with the ATMega328p and ATTiny85
 * [blink-interrupts](https://github.com/spro/learning-avrc/tree/master/blink-interrupts)
   One LED blinks while another responds to state changes with an interrupt.
 
+* [blink-timers](https://github.com/spro/learning-avrc/tree/master/blink-timers)
+  Two LEDs blinking at different rates using timer interrupts.
+
